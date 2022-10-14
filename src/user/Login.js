@@ -42,23 +42,6 @@ const LoginForm = styled.form`
   }
 `;
 
-const SignupLink = styled(Link)`
-  display: flex;
-  width: 100%;
-  justify-content: flex-end;
-  margin-top: 3.1rem;
-  font-weight: bold;
-  background-color: #d9d9d9;
-  border-radius: 10px;
-  padding: 10px;
-  span {
-    padding-bottom: 3px;
-  }
-  &:hover {
-    color: #414141c1;
-  }
-`;
-
 const Login = () => {
   const navigate = useNavigate();
   //const active = useSetRecoilState(access);
@@ -90,9 +73,6 @@ const Login = () => {
               autoComplete="off"
             />
             <button>로그인</button>
-            <SignupLink to={"/signup"}>
-              <span>회원가입 &rarr;</span>
-            </SignupLink>
           </LoginForm>
         </Wrapper>
       </AuthBlock>
