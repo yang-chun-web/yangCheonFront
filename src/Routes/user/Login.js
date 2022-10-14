@@ -1,5 +1,6 @@
 import { useForm } from "react-hook-form";
 import { useNavigate, Link } from "react-router-dom";
+import { useSetRecoilState } from "recoil";
 import { login } from "../../api";
 
 import styled from "styled-components";
@@ -11,6 +12,7 @@ import {
   AuthTitle,
   AuthInput,
 } from "../../styles/user/auth";
+import { access } from "../../atom";
 
 const Block = styled.div`
   ${mediaStyle};
@@ -45,13 +47,16 @@ const LoginForm = styled.form`
 
 const Login = () => {
   const navigate = useNavigate();
-  //const active = useSetRecoilState(access);
+  const userAccessed = useSetRecoilState(access);
   const { register, handleSubmit } = useForm();
   const onValid = (data) => {
     console.log(data);
     login(data)
-      .then(() => navigate("/"))
-      .catch(() => navigate("/user/login"));
+      .then(() => {
+        userAccessed(() => true);
+        navigate("/");
+      })
+      .catch(() => alert("입력된 정보가 올바르지 않습니다"));
     /*  login(data)
       .then(() => {
         active(() => true);
