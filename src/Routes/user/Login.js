@@ -48,7 +48,10 @@ const Login = () => {
   //const active = useSetRecoilState(access);
   const { register, handleSubmit } = useForm();
   const onValid = (data) => {
-    login(data).then((res) => console.log(res));
+    console.log(data);
+    login(data)
+      .then(() => navigate("/"))
+      .catch(() => navigate("/user/login"));
     /*  login(data)
       .then(() => {
         active(() => true);
