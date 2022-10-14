@@ -130,6 +130,13 @@ const reset = css`
     border-collapse: collapse;
     border-spacing: 0;
   }
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
+  body {
+    background-color: #e2e2e2;
+  }
 `;
 
 const ResetCSS = createGlobalStyle`${reset}`;
