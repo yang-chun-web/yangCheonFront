@@ -57,12 +57,6 @@ const Login = () => {
         navigate("/");
       })
       .catch(() => alert("입력된 정보가 올바르지 않습니다"));
-    /*  login(data)
-      .then(() => {
-        active(() => true);
-        navigate("/");
-      })
-      .catch(() => navigate("/login")); */
   };
   return (
     <Block>

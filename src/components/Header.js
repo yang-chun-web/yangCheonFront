@@ -1,11 +1,10 @@
 import { useRecoilState } from "recoil";
 import { access } from "../atom";
-import { logout } from "../api";
 import { AiOutlineEdit } from "react-icons/ai";
+import { logout } from "../api";
 
 import styled from "styled-components";
-import Button from "./common/Button";
-import mediaStyle from "../styles/mediaStyle";
+import { btnStyle, mediaStyle } from "../styles/common";
 import { Link } from "react-router-dom";
 
 const Block = styled.div`
@@ -42,13 +41,18 @@ const TopSpace = styled.div`
   height: 4rem;
 `;
 
+const Button = styled(Link)`
+  ${btnStyle}
+`;
+
 function Header() {
   const [activeUser, setActiveUser] = useRecoilState(access);
   const onLogoutClick = () => {
-    logout().then(() => {
+    logout().then(() => setActiveUser(() => false));
+    /* logout().then(() => {
       localStorage.clear();
       setActiveUser(() => false);
-    });
+    }); */
   };
   return (
     <>
@@ -66,7 +70,7 @@ function Header() {
                 <Button onClick={onLogoutClick}>로그아웃</Button>
               </>
             ) : (
-              <Button to={"/login"}>로그인</Button>
+              <Button to={"/user/login"}>로그인</Button>
             )}
           </div>
         </Wrapper>
