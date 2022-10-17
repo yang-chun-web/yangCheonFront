@@ -5,7 +5,7 @@ import { logout } from "../api";
 
 import styled from "styled-components";
 import { btnStyle, mediaStyle } from "../styles/common";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Block = styled.div`
   position: fixed;
@@ -46,9 +46,13 @@ const Button = styled(Link)`
 `;
 
 function Header() {
+  const navigate = useNavigate();
   const [activeUser, setActiveUser] = useRecoilState(access);
   const onLogoutClick = () => {
-    logout().then(() => setActiveUser(() => false));
+    logout().then(() => {
+      setActiveUser(() => false);
+      navigate("/");
+    });
     /* logout().then(() => {
       localStorage.clear();
       setActiveUser(() => false);

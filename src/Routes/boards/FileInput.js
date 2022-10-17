@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useForm, useFieldArray } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import { btnStyle } from "../../styles/common";
+import { boardRegister } from "../../api";
 import styled from "styled-components";
 
 const Button = styled.button`
@@ -38,7 +39,7 @@ const FileInput = ({ text }) => {
       imageList.forEach((item, index, array) => {
         formData.append("file", item.name[0]);
       });
-      test(formData, text.token)
+      boardRegister(formData)
         .then(() => navigate("/"))
         .catch((error) => console.log(error));
     } else {

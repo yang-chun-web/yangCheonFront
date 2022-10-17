@@ -60,7 +60,6 @@ const Register = () => {
   const body = {
     title,
     contents,
-    token: localStorage.getItem("Access"),
   };
   const toolbar = {
     toolbar: [

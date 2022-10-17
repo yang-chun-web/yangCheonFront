@@ -5,5 +5,9 @@ export const login = async (userInfo) => {
 };
 
 export const logout = async () => {
-  await axios.get("user/logout");
+  await axios.get("/user/logout");
+};
+
+export const boardRegister = async (formData) => {
+  await axios.post("/board/board-register", formData);
 };
