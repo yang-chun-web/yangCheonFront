@@ -1,4 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Detail from "./Routes/boards/Detail";
 import List from "./Routes/boards/List";
 import Register from "./Routes/boards/Register";
 import Home from "./Routes/Home";
@@ -12,6 +13,7 @@ function App() {
         <Route path="/user/login" element={<Login />} />
         <Route path="/boards/list" element={<List />} />
         <Route path="/boards/register" element={<Register />} />
+        <Route path="/boards/:id" element={<Detail />} />
       </Routes>
     </Router>
   );

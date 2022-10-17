@@ -68,7 +68,7 @@ function Header() {
           <div className="login-btn">
             {activeUser ? (
               <>
-                <Icon to={"boards/register"}>
+                <Icon to={"/boards/register"}>
                   <AiOutlineEdit />
                 </Icon>
                 <Button onClick={onLogoutClick}>로그아웃</Button>
