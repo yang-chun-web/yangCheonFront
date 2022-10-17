@@ -1,15 +1,13 @@
 import { useEffect, useState } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import { btnStyle } from "../../styles/common";
+import { btnStyle, mediaStyle } from "../../styles/common";
 import Header from "../../components/Header";
+import { remove } from "../../api";
 
 const Block = styled.div`
-  position: fixed;
-  width: 100%;
-  background: white;
-  box-shadow: 0px 2px 4px #5e5e5e86;
-  z-index: 5;
+  ${mediaStyle}
+  height: 88vh;
 `;
 
 const Wrapper = styled.div`
@@ -61,6 +59,7 @@ const DeleteButton = styled.button`
 
 const Detail = () => {
   const param = useParams();
+  const navigate = useNavigate();
   const [detail, setDetail] = useState();
   const [files, setFiles] = useState();
 
@@ -71,13 +70,20 @@ const Detail = () => {
         (res) => res.json()
       );
       setDetail(data);
-      console.log(data);
       if (data.files) {
         setFiles(data.files);
       }
     };
     text(id);
   }, [param]);
+
+  const onRemoveClick = () => {
+    console.log(detail);
+    const textId = {
+      id: String(param.id),
+    };
+    remove(textId).then(() => navigate("/"));
+  };
 
   return (
     <div>
@@ -97,6 +103,10 @@ const Detail = () => {
               ? files.map((file) => <div key={file.hash}>{file.path}</div>)
               : ""}
           </Wrapper>
+          <ButtonBlock>
+            <EditButton to={`/edit/${detail._id}`}>수정하기</EditButton>
+            <DeleteButton onClick={onRemoveClick}>삭제하기</DeleteButton>
+          </ButtonBlock>
 
           {/* {Object.values(writer)[0] ? (
             <ButtonBlock>
