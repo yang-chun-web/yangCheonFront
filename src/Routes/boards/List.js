@@ -52,7 +52,6 @@ const List = () => {
     const response = await fetch("/board/board-search-list");
     console.log(Paging);
     const body = await response.json();
-    console.log(body);
     setList(body);
   };
   
@@ -68,7 +67,7 @@ const List = () => {
         {loading
           ? ""
           : list.map((item) => (
-              <TextCard to={`/board/${item._id}`} key={item._id}>
+              <TextCard to={`/boards/${item._id}`} key={item._id}>
                 <Title>{item.title}</Title>
                 <CreatedAt>
                   {new Date(item.createdAt).toLocaleDateString()}
