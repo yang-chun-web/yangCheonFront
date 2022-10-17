@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import Paging from "../page/Page";
 
 const Block = styled.div`
   position: fixed;
@@ -45,13 +46,16 @@ const CreatedAt = styled.span`
 const List = () => {
   const [loading, setLoading] = useState(true);
   const [list, setList] = useState([]);
+  
 
   const fetchList = async () => {
     const response = await fetch("/board/board-search-list");
+    console.log(Paging);
     const body = await response.json();
     console.log(body);
     setList(body);
   };
+  
 
   useEffect(() => {
     fetchList();
@@ -71,6 +75,7 @@ const List = () => {
                 </CreatedAt>
               </TextCard>
             ))}
+            <Paging></Paging>
       </Wrapper>
     </Block>
   );

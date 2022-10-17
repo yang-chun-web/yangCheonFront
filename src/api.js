@@ -11,3 +11,7 @@ export const logout = async () => {
 export const boardRegister = async (formData) => {
   await axios.post("/board/board-register", formData);
 };
+
+export const paging = async () => {
+  await axios.post("/paging");
+};
