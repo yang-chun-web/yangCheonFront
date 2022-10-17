@@ -37,7 +37,7 @@ const FileInput = ({ text }) => {
       formData.append("title", text.title);
       formData.append("contents", text.contents);
       imageList.forEach((item, index, array) => {
-        formData.append("file", item.name[0]);
+        formData.append("files", item.name[0]);
       });
       boardRegister(formData)
         .then(() => navigate("/"))
