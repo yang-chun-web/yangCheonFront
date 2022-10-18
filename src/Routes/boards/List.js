@@ -1,21 +1,17 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import { mediaStyle } from "../../styles/common";
 
 const Block = styled.div`
-  position: fixed;
-  width: 100%;
-  background: white;
-  box-shadow: 0px 2px 4px #5e5e5e86;
-  z-index: 5;
+  ${mediaStyle}
+  height: 88vh;
 `;
 
 const Wrapper = styled.div`
   padding: 1rem;
   background-color: #ffffffee;
-  height: 88vh;
   z-index: 0;
-  overflow-y: scroll;
 `;
 
 const TextCard = styled(Link)`
