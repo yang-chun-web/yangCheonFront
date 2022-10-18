@@ -70,7 +70,7 @@ const Detail = () => {
         (res) => res.json()
       );
       setDetail(data);
-      if (data.files) {
+      if (data.files.length !== 0) {
         setFiles(data.files);
       }
     };
@@ -78,7 +78,6 @@ const Detail = () => {
   }, [param]);
 
   const onRemoveClick = () => {
-    console.log(detail);
     const textId = {
       id: String(param.id),
     };
@@ -104,7 +103,7 @@ const Detail = () => {
               : ""}
           </Wrapper>
           <ButtonBlock>
-            <EditButton to={`/edit/${detail._id}`}>수정하기</EditButton>
+            <EditButton to={`/boards/edit/${detail._id}`}>수정하기</EditButton>
             <DeleteButton onClick={onRemoveClick}>삭제하기</DeleteButton>
           </ButtonBlock>
 

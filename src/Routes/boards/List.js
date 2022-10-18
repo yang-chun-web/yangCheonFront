@@ -11,7 +11,6 @@ const Block = styled.div`
 const Wrapper = styled.div`
   padding: 1rem;
   background-color: #ffffffee;
-  height: 88vh;
   z-index: 0;
 `;
 

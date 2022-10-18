@@ -12,6 +12,10 @@ export const boardRegister = async (formData) => {
   await axios.post("/board/board-register", formData);
 };
 
+export const boardEdit = async (formData) => {
+  await axios.post("/board/board-update", formData);
+};
+
 export const remove = async (textId) => {
   await axios.post("/board/board-delete", textId);
 };
