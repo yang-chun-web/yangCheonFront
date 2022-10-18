@@ -4,7 +4,6 @@ import { Link, useNavigate } from "react-router-dom";
 import { btnStyle } from "../../styles/common";
 import { boardEdit } from "../../api";
 import styled from "styled-components";
-import { file } from "@babel/types";
 
 const Button = styled.button`
   ${btnStyle}

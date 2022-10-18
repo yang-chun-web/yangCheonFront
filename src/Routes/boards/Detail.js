@@ -11,10 +11,10 @@ const Block = styled.div`
 `;
 
 const Wrapper = styled.div`
+  position: relative;
   padding: 2rem;
   background-color: #ffffffee;
   min-height: 500px;
-  height: 80vh;
   z-index: 0;
 `;
 
@@ -32,6 +32,7 @@ const CreatedAt = styled.span`
 const BoardContents = styled.div`
   margin-top: 1.5rem;
   margin-left: 1rem;
+  min-height: 80vh;
 `;
 
 const ButtonBlock = styled.div`
@@ -54,6 +55,13 @@ const DeleteButton = styled.button`
   margin-right: 1rem;
   &:hover {
     color: #c10000;
+  }
+`;
+const FileBlock = styled.div`
+  display: flex;
+  flex-direction: column;
+  div {
+    margin: 1rem;
   }
 `;
 
@@ -98,9 +106,11 @@ const Detail = () => {
             <BoardContents
               dangerouslySetInnerHTML={{ __html: `${detail.contents}` }}
             />
-            {files
-              ? files.map((file) => <div key={file.hash}>{file.path}</div>)
-              : ""}
+            <FileBlock>
+              {files
+                ? files.map((file) => <div key={file.hash}>{file.path}</div>)
+                : ""}
+            </FileBlock>
           </Wrapper>
           <ButtonBlock>
             <EditButton to={`/boards/edit/${detail._id}`}>수정하기</EditButton>
