@@ -18,7 +18,6 @@ const Wrapper = styled.div`
   background-color: #ffffffee;
   height: 88vh;
   z-index: 0;
-  overflow-y: scroll;
 `;
 
 const TextCard = styled(Link)`
