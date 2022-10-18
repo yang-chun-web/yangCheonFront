@@ -13,5 +13,5 @@ export const boardRegister = async (formData) => {
 };
 
 export const paging = async () => {
-  await axios.post("/paging");
+  await axios.post("/board-nextPage");
 };
