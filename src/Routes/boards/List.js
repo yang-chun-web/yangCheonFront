@@ -2,21 +2,17 @@ import React, { useState, useEffect } from "react";
 import Pagination from "react-js-pagination";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import { mediaStyle } from "../../styles/common";
 
 const Block = styled.div`
-  position: fixed;
-  width: 100%;
-  background: white;
-  box-shadow: 0px 2px 4px #5e5e5e86;
-  z-index: 5;
+  ${mediaStyle}
 `;
 
 const Wrapper = styled.div`
   padding: 1rem;
   background-color: #ffffffee;
-  height: 88vh;
   z-index: 0;
-  overflow-y: scroll;
+  height: 100%;
 `;
 
 const TextCard = styled(Link)`
@@ -43,12 +39,10 @@ const CreatedAt = styled.span`
   align-items: center;
 `;
 
-
-
 const List = () => {
   const [loading, setLoading] = useState(true);
   const [list, setList] = useState([]);
-  const [page,setPage] = useState(1);
+  const [page, setPage] = useState(1);
   const [total, setTotal] = useState(0);
   const [cPage, setCpage] = useState(5);
   const [findStr, setFindStr] = useState("");
@@ -147,13 +141,12 @@ const List = () => {
     setList(body);
   };
 
- 
   useEffect(() => {
     getTotal();
     fetchList();
     setLoading(false);
   }, []);
-  
+
   return (
     <Block>
       <Wrapper>

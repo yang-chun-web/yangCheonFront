@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Detail from "./Routes/boards/Detail";
+import Edit from "./Routes/boards/Edit";
 import List from "./Routes/boards/List";
 import Register from "./Routes/boards/Register";
 import Home from "./Routes/Home";
@@ -15,6 +16,7 @@ function App() {
         <Route path="/boards/register" element={<Register />} />
         <Route path="/paging" element={<Page />} />
         <Route path="/boards/:id" element={<Detail />} />
+        <Route path="/boards/edit/:id" element={<Edit />} />
       </Routes>
     </Router>
   );

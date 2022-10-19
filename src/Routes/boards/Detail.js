@@ -11,10 +11,10 @@ const Block = styled.div`
 `;
 
 const Wrapper = styled.div`
+  position: relative;
   padding: 2rem;
   background-color: #ffffffee;
   min-height: 500px;
-  height: 80vh;
   z-index: 0;
 `;
 
@@ -32,6 +32,7 @@ const CreatedAt = styled.span`
 const BoardContents = styled.div`
   margin-top: 1.5rem;
   margin-left: 1rem;
+  min-height: 80vh;
 `;
 
 const ButtonBlock = styled.div`
@@ -56,6 +57,13 @@ const DeleteButton = styled.button`
     color: #c10000;
   }
 `;
+const FileBlock = styled.div`
+  display: flex;
+  flex-direction: column;
+  div {
+    margin: 1rem;
+  }
+`;
 
 const Detail = () => {
   const param = useParams();
@@ -70,7 +78,7 @@ const Detail = () => {
         (res) => res.json()
       );
       setDetail(data);
-      if (data.files) {
+      if (data.files.length !== 0) {
         setFiles(data.files);
       }
     };
@@ -78,7 +86,6 @@ const Detail = () => {
   }, [param]);
 
   const onRemoveClick = () => {
-    console.log(detail);
     const textId = {
       id: String(param.id),
     };
@@ -99,12 +106,14 @@ const Detail = () => {
             <BoardContents
               dangerouslySetInnerHTML={{ __html: `${detail.contents}` }}
             />
-            {files
-              ? files.map((file) => <div key={file.hash}>{file.path}</div>)
-              : ""}
+            <FileBlock>
+              {files
+                ? files.map((file) => <div key={file.hash}>{file.path}</div>)
+                : ""}
+            </FileBlock>
           </Wrapper>
           <ButtonBlock>
-            <EditButton to={`/edit/${detail._id}`}>수정하기</EditButton>
+            <EditButton to={`/boards/edit/${detail._id}`}>수정하기</EditButton>
             <DeleteButton onClick={onRemoveClick}>삭제하기</DeleteButton>
           </ButtonBlock>
 
