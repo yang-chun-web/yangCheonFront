@@ -96,6 +96,13 @@ const List = () => {
       setFindStr(e.target.value);
     }
 
+    // 엔터키 누르면 검색
+    const searchEnter = async(e) => {
+      if(e.key === 'Enter'){
+        search();
+      }
+    }
+
     // 검색하기
     const search = async(e) => {
       
@@ -151,7 +158,7 @@ const List = () => {
     <Block>
       <Wrapper>
         
-              <input value={findStr} onChange={onChangeFind}></input>
+              <input value={findStr} onChange={onChangeFind} onKeyPress={searchEnter}></input>
               <button onClick={(e)=>search(e)}>검색</button>
             
         {loading
