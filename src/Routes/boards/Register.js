@@ -14,7 +14,6 @@ const EditorBlock = styled.div`
   background-color: white;
   padding-top: 3rem;
   padding-bottom: 5rem;
-  height: 80vh;
   min-height: 500px;
 `;
 

@@ -53,10 +53,6 @@ function Header() {
       setActiveUser(() => false);
       navigate("/");
     });
-    /* logout().then(() => {
-      localStorage.clear();
-      setActiveUser(() => false);
-    }); */
   };
   return (
     <>
