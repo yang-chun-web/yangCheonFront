@@ -4,6 +4,8 @@ import styled from "styled-components";
 import { btnStyle, mediaStyle } from "../../styles/common";
 import Header from "../../components/Header";
 import { remove } from "../../api";
+import { useRecoilState } from "recoil";
+import { owner } from "../../atom";
 
 const Block = styled.div`
   ${mediaStyle}
@@ -70,20 +72,22 @@ const Detail = () => {
   const navigate = useNavigate();
   const [detail, setDetail] = useState();
   const [files, setFiles] = useState();
+  const [writer, setWriter] = useRecoilState(owner);
 
   useEffect(() => {
     const { id } = param;
     const text = async (id) => {
-      const { data } = await fetch(`/board/board-search-one/${id}`).then(
+      const response = await fetch(`/board/board-search-one/${id}`).then(
         (res) => res.json()
       );
-      setDetail(data);
-      if (data.files.length !== 0) {
-        setFiles(data.files);
+      setDetail(response.body.data);
+      if (response.body.data.files.length !== 0) {
+        setFiles(response.body.data.files);
       }
+      setWriter(response.owner);
     };
     text(id);
-  }, [param]);
+  }, [param, setWriter]);
 
   const onRemoveClick = () => {
     const textId = {
@@ -130,17 +134,15 @@ const Detail = () => {
                 
             </FileBlock>
           </Wrapper>
-          <ButtonBlock>
-            <EditButton to={`/boards/edit/${detail._id}`}>수정하기</EditButton>
-            <DeleteButton onClick={onRemoveClick}>삭제하기</DeleteButton>
-          </ButtonBlock>
 
-          {/* {Object.values(writer)[0] ? (
+          {Object.values(writer)[0] ? (
             <ButtonBlock>
-              <EditButton to={`/edit/${detail._id}`}>수정하기</EditButton>
+              <EditButton to={`/boards/edit/${detail._id}`}>
+                수정하기
+              </EditButton>
               <DeleteButton onClick={onRemoveClick}>삭제하기</DeleteButton>
             </ButtonBlock>
-          ) : null} */}
+          ) : null}
         </Block>
       ) : null}
     </div>
