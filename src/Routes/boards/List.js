@@ -46,7 +46,7 @@ const List = () => {
   const [list, setList] = useState([]);
   const [page, setPage] = useState(1);
   const [total, setTotal] = useState(0);
-  const [cPage, setCpage] = useState(5);
+  const [cPage, setCpage] = useState(5); // 한 페이지에 보여줄 개수
   const [findStr, setFindStr] = useState("");
 
   // 토탈값 가져오기
@@ -172,6 +172,15 @@ const List = () => {
                 </CreatedAt>
               </TextCard>
             ))}
+            <Pagination
+              activePage={page} // 현재 페이지
+              itemsCountPerPage={cPage} // 한 페이지당 보여줄 리스트 아이템의 개수
+              totalItemsCount={total} // 총 아이템의 개수
+              pageRangeDisplayed={5} // 페이지내에서 보여줄 페이지 범위
+              prevPageText={"‹"}
+              nextPageText={"›"}
+              onChange={handlePageChange} // 페이지가 바뀔 때 핸들링해주는 함수
+            />
       </Wrapper>
       <Pagination
         activePage={page} // 현재 페이지
