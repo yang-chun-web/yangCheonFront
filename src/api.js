@@ -8,6 +8,10 @@ export const logout = async () => {
   await axios.get("/user/logout");
 };
 
+export const deleteUser = async (userObjectId) => {
+  await axios.post("/user/delete", userObjectId);
+};
+
 export const boardRegister = async (formData) => {
   await axios.post("/board/board-register", formData);
 };
