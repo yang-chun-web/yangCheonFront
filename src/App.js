@@ -5,7 +5,8 @@ import List from "./Routes/boards/List";
 import Register from "./Routes/boards/Register";
 import Home from "./Routes/Home";
 import Login from "./Routes/user/Login";
-import Page from "./Routes/page/Page";
+import SignUp from "./Routes/admin/SignUp";
+
 function App() {
   return (
     <Router>
@@ -14,7 +15,7 @@ function App() {
         <Route path="/user/login" element={<Login />} />
         <Route path="/boards/list" element={<List />} />
         <Route path="/boards/register" element={<Register />} />
-        <Route path="/paging" element={<Page />} />
+        <Route path="/admin/signUp" element={<SignUp />} />
         <Route path="/boards/:id" element={<Detail />} />
         <Route path="/boards/edit/:id" element={<Edit />} />
       </Routes>

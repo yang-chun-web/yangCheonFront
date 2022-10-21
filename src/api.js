@@ -20,6 +20,6 @@ export const remove = async (textId) => {
   await axios.post("/board/board-delete", textId);
 };
 
-export const paging = async () => {
-  await axios.post("/board-nextPage");
+export const signUp = async (userInfo) => {
+  return await axios.post("/user/signUp", userInfo);
 };
