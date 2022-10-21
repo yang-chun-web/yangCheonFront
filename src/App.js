@@ -6,6 +6,7 @@ import Register from "./Routes/boards/Register";
 import Home from "./Routes/Home";
 import Login from "./Routes/user/Login";
 import SignUp from "./Routes/admin/SignUp";
+import MemberList from "./Routes/admin/MemberList";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Route path="/boards/list" element={<List />} />
         <Route path="/boards/register" element={<Register />} />
         <Route path="/admin/signUp" element={<SignUp />} />
+        <Route path="/admin/memberList" element={<MemberList />} />
         <Route path="/boards/:id" element={<Detail />} />
         <Route path="/boards/edit/:id" element={<Edit />} />
       </Routes>
