@@ -5,14 +5,19 @@ import { signUp } from "../../api";
 const SignUp = () => {
   const { register, handleSubmit } = useForm();
   const onSubmit = (userInfo) => {
-    signUp(userInfo).then((res) => console.log(res));
+    console.log(userInfo);
+    signUp(userInfo)
+      .then((res) => alert(res.data.message))
+      .catch((error) => {
+        alert(error.response.data.message);
+      });
   };
   return (
     <div>
       <Header />
       <form onSubmit={handleSubmit(onSubmit)}>
-        <input {...register("id")} placeholder="아이디" />
-        <input {...register("pw")} placeholder="패스워드" />
+        <input {...register("id", { required: true })} placeholder="아이디" />
+        <input {...register("pw", { required: true })} placeholder="패스워드" />
         <button>등록</button>
       </form>
     </div>
