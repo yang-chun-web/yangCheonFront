@@ -3,13 +3,13 @@ import Header from "../../components/Header";
 
 const MemberList = () => {
     const [loading, setLoading] = useState(true);
-    const [MList, setMList] = useState([]);
+    const [memberList, setMemberList] = useState([]);
 
     const fetchMList= async()=>{
         const reqData = await fetch("/user/memberList")
         const body = await reqData.json()
         console.log(body);
-        setMList(body);
+        setMemberList(body);
     }
 
     useEffect(()=>{
@@ -24,7 +24,7 @@ const MemberList = () => {
             <h6>아이디</h6>
             {loading
             ? ""
-            : MList.map((item) => (
+            : memberList.map((item) => (
                     <span key={item._id}>{item.userId}<br/></span>
             ))}
         </div>

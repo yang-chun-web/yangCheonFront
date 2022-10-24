@@ -23,3 +23,7 @@ export const remove = async (textId) => {
 export const signUp = async (userInfo) => {
   return await axios.post("/user/signUp", userInfo);
 };
+
+export const paging = async (pageData) => {
+  return await axios.post("/user/memberTotal", pageData);
+};
