@@ -99,7 +99,7 @@ const Detail = () => {
  // 다운로드 
  // ipfs파일 주소 http://192.168.0.116:8080/ipfs/hash값 ? filename=path값
  const downloadClick = (file) => {
-  const url = "http://192.168.0.116:8080/ipfs/"+file.hash+"?filename="+file.path+"&download=true";
+  const url = "http://192.168.0.123:9090/ipfs/"+file.hash+"?filename="+file.path+"&download=true";
 
   const element = document.createElement('a'); // a 태그 생성
   element.download = file.path;
