@@ -96,20 +96,23 @@ const Detail = () => {
     remove(textId).then(() => navigate("/"));
   };
 
- // 다운로드 
- // ipfs파일 주소 http://192.168.0.116:8080/ipfs/hash값 ? filename=path값
- const downloadClick = (file) => {
-  const url = "http://192.168.0.116:8080/ipfs/"+file.hash+"?filename="+file.path+"&download=true";
+  // 다운로드
+  // ipfs파일 주소 http://192.168.0.116:8080/ipfs/hash값 ? filename=path값
+  const downloadClick = (file) => {
+    const url =
+      "http://192.168.0.123:9090/ipfs/" +
+      file.hash +
+      "?filename=" +
+      file.path +
+      "&download=true";
 
-  const element = document.createElement('a'); // a 태그 생성
-  element.download = file.path;
-  element.href = url;
-  document.body.appendChild(element);
-  element.click();
-  element.parentNode.removeChild(element);
-}
- 
-
+    const element = document.createElement("a"); // a 태그 생성
+    element.download = file.path;
+    element.href = url;
+    document.body.appendChild(element);
+    element.click();
+    element.parentNode.removeChild(element);
+  };
 
   return (
     <div>
@@ -127,11 +130,25 @@ const Detail = () => {
             />
             <FileBlock>
               {files
-                ? files.map((file) => <div key={file.hash}>
-                  <a target="new" href={'http://192.168.0.116:8080/ipfs/'+file.hash+'?filename='+file.path} >{file.path}</a>
-                  <button onClick={()=>downloadClick(file) }>다운로드</button></div>)
+                ? files.map((file) => (
+                    <div key={file.hash}>
+                      <a
+                        target="new"
+                        href={
+                          "http://192.168.0.123:9090/ipfs/" +
+                          file.hash +
+                          "?filename=" +
+                          file.path
+                        }
+                      >
+                        {file.path}
+                      </a>
+                      <button onClick={() => downloadClick(file)}>
+                        다운로드
+                      </button>
+                    </div>
+                  ))
                 : ""}
-                
             </FileBlock>
           </Wrapper>
 
