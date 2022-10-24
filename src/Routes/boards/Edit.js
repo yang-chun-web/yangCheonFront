@@ -87,13 +87,13 @@ const Edit = () => {
   };
 
   const text = async (id) => {
-    const { data } = await fetch(`/board/board-search-one/${id}`).then((res) =>
-      res.json()
-    );
-    console.log(data);
-    setDetail(data);
-    if (data.files.length !== 0) {
-      setFiles(data.files);
+    const  data  = await fetch(`/board/board-search-one/${id}`)
+    .then(
+      (res) => res.json()
+      );
+      setDetail(data.body.data);
+    if (data.body.data.files.length !== 0) {
+      setFiles(data.body.data.files);
     }
   };
 
