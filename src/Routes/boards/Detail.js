@@ -77,7 +77,8 @@ const Detail = () => {
   useEffect(() => {
     const { id } = param;
     const text = async (id) => {
-      const response = await fetch(`/board/board-search-one/${id}`).then(
+      const response = await fetch(`/board/board-search-one/${id}`)
+      .then(
         (res) => res.json()
       );
       setDetail(response.body.data);
@@ -128,7 +129,7 @@ const Detail = () => {
             <FileBlock>
               {files
                 ? files.map((file) => <div key={file.hash}>
-                  <a target="new" href={'http://192.168.0.116:8080/ipfs/'+file.hash+'?filename='+file.path} >{file.path}</a>
+                  <a target="new" href={'http://192.168.0.123:9090/ipfs/'+file.hash+'?filename='+file.path} >{file.path}</a>
                   <button onClick={()=>downloadClick(file) }>다운로드</button></div>)
                 : ""}
                 
