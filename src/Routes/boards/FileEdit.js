@@ -43,15 +43,9 @@ const FileEdit = ({ id, text, files }) => {
         formData.append("files", item.name[0]);
       });
       if (oldFiles) {
-        if (oldFiles.length === 1) {
-          const hash = [];
-          hash.push(oldFiles[0].hash);
-          formData.append("oldFiles", hash);
-        } else {
-          oldFiles.forEach((item) => {
-            formData.append("oldFiles", item.hash);
-          });
-        }
+        oldFiles.forEach((item) => {
+          formData.append("oldFiles", item.hash);
+        });
       }
       boardEdit(formData)
         .then(() => navigate("/"))
