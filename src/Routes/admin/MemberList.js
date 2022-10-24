@@ -3,6 +3,8 @@ import Header from "../../components/Header";
 import styled from "styled-components";
 import { mediaStyle } from "../../styles/common";
 import { deleteUser } from "../../api";
+import { useRecoilValue } from "recoil";
+import { admin } from "../../atom";
 
 const Block = styled.div`
   ${mediaStyle}
@@ -40,10 +42,11 @@ const DeleteBtn = styled.span`
 `;
 
 const MemberList = () => {
+  const adminCheck = useRecoilValue(admin);
   const [loading, setLoading] = useState(true);
   const [memberList, setMemberList] = useState([]);
 
-  const fetchMList = async () => {
+  const fetchMemberList = async () => {
     const reqData = await fetch("/user/memberList");
     const body = await reqData.json();
     setMemberList(body);
@@ -51,35 +54,39 @@ const MemberList = () => {
 
   const onDeleteClick = (event) => {
     const target = event.target.id;
-    //deleteUser({ userObjectId: event.target.id });
+    deleteUser({ userObjectId: event.target.id });
     const list = memberList.filter((item) => item._id !== target);
     setMemberList(list);
   };
 
   useEffect(() => {
-    fetchMList();
+    fetchMemberList();
     setLoading(false);
   }, []);
 
   return (
     <>
       <Header />
-      <Block>
-        <Wrapper>
-          {loading
-            ? ""
-            : memberList.map((item) => (
-                <TextCard key={item._id}>
-                  <UserInfo>
-                    <Title>{item.userId}</Title>
-                  </UserInfo>
-                  <DeleteBtn id={`${item._id}`} onClick={onDeleteClick}>
-                    ❌
-                  </DeleteBtn>
-                </TextCard>
-              ))}
-        </Wrapper>
-      </Block>
+      {adminCheck ? (
+        <Block>
+          <Wrapper>
+            {loading
+              ? ""
+              : memberList.map((item) => (
+                  <TextCard key={item._id}>
+                    <UserInfo>
+                      <Title>{item.userId}</Title>
+                    </UserInfo>
+                    <DeleteBtn id={`${item._id}`} onClick={onDeleteClick}>
+                      ❌
+                    </DeleteBtn>
+                  </TextCard>
+                ))}
+          </Wrapper>
+        </Block>
+      ) : (
+        ""
+      )}
     </>
   );
 };

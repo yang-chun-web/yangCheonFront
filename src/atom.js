@@ -9,3 +9,8 @@ export const owner = atom({
   key: "owner",
   default: false,
 });
+
+export const admin = atom({
+  key: "admin",
+  default: false,
+});
