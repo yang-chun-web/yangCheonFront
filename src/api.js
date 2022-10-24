@@ -8,6 +8,10 @@ export const logout = async () => {
   await axios.get("/user/logout");
 };
 
+export const refreshToken = async () => {
+  return await fetch("/user/refresh");
+};
+
 export const deleteUser = async (userObjectId) => {
   await axios.post("/user/delete", userObjectId);
 };

@@ -40,7 +40,10 @@ const FileInput = ({ text }) => {
         formData.append("files", item.name[0]);
       });
       boardRegister(formData)
-        .then(() => navigate("/"))
+        .then(() => {
+          navigate("/");
+          formData.delete();
+        })
         .catch((error) => console.log(error));
     } else {
       alert("제목을 입력하세요");

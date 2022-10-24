@@ -7,10 +7,8 @@ import "./Routes/page/Page.css";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <React.StrictMode>
-    <RecoilRoot>
-      <ResetCSS />
-      <App />
-    </RecoilRoot>
-  </React.StrictMode>
+  <RecoilRoot>
+    <ResetCSS />
+    <App />
+  </RecoilRoot>
 );
