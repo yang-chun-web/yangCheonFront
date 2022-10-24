@@ -87,10 +87,10 @@ const Edit = () => {
   };
 
   const text = async (id) => {
-    const { data } = await fetch(`/board/board-search-one/${id}`).then((res) =>
+    const { body } = await fetch(`/board/board-search-one/${id}`).then((res) =>
       res.json()
     );
-    console.log(data);
+    const { data } = body;
     setDetail(data);
     if (data.files.length !== 0) {
       setFiles(data.files);
