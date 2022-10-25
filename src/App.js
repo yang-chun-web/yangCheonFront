@@ -19,7 +19,7 @@ function App() {
       const jsonResult = await fetch("/user/refresh")
         .then((res) => res.json())
         .catch((error) => console.log(error));
-      if (jsonResult) {
+      if (jsonResult.admin) {
         setActiveUser(() => true);
         setAdmin(() => jsonResult.admin);
       }
