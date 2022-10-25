@@ -2,9 +2,10 @@ import React, { useEffect, useState } from "react";
 import Header from "../../components/Header";
 import styled from "styled-components";
 import { mediaStyle } from "../../styles/common";
-import { deleteUser } from "../../api";
+import { deleteUser, TestMember} from "../../api";
 import { useRecoilValue } from "recoil";
 import { admin } from "../../atom";
+import Paging from "../page/Page";
 
 const Block = styled.div`
   ${mediaStyle}
@@ -45,12 +46,44 @@ const MemberList = () => {
   const adminCheck = useRecoilValue(admin);
   const [loading, setLoading] = useState(true);
   const [memberList, setMemberList] = useState([]);
+  const [page, setPage] = useState(1); // 현재페이지
+  const [total, setTotal] = useState(0); // 전체 페이지
+  const [size, setSize] = useState(2); // 보여줄 항목 개수
+  const [maxPage, setMaxPage] = useState(0); // 한 페이지에 보여줄 페이지 개수
+  //const [getData, setData] = useState(0);
+
+  const pageData = {
+    page : page,
+    total : total,
+    size : size,
+    maxPage : maxPage
+  }
 
   const fetchMemberList = async () => {
     const reqData = await fetch("/user/memberList");
     const body = await reqData.json();
     setMemberList(body);
   };
+  
+  const TestMemberList = async () => {
+    const reqData = await TestMember(pageData);
+    console.log(reqData);
+    const body = await reqData.data.listData;
+    const reqPageData = reqData.data.pageData;
+    setMemberList(body);
+
+    setPage(reqPageData.page);
+    setTotal(reqPageData.total);
+    setSize(reqPageData.size);
+    setMaxPage(reqPageData.maxPage);
+
+  };
+
+  const getData = (getData) => {
+    setPage(getData);
+    console(getData);
+  }
+
 
   const onDeleteClick = (event) => {
     const target = event.target.id;
@@ -60,14 +93,15 @@ const MemberList = () => {
   };
 
   useEffect(() => {
-    fetchMemberList();
+    // fetchMemberList();
+    TestMemberList();
     setLoading(false);
   }, []);
 
   return (
     <>
       <Header />
-      {adminCheck ? (
+      {/* {adminCheck ? ( */}
         <Block>
           <Wrapper>
             {loading
@@ -84,9 +118,10 @@ const MemberList = () => {
                 ))}
           </Wrapper>
         </Block>
-      ) : (
-        ""
-      )}
+        <Paging pageData={pageData} getData={getData}  />
+      {/* ) : ( */}
+        {/* "" */}
+      {/* )} */}
     </>
   );
 };

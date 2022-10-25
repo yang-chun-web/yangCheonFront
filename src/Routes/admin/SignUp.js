@@ -18,7 +18,7 @@ const SignUp = () => {
   return (
     <div>
       <Header />
-      {adminCheck ? (
+      {/* {adminCheck ? ( */}
         <form onSubmit={handleSubmit(onSubmit)}>
           <input {...register("id", { required: true })} placeholder="아이디" />
           <input
@@ -27,9 +27,10 @@ const SignUp = () => {
           />
           <button>등록</button>
         </form>
-      ) : (
-        ""
-      )}
+      {/* ) : ( */}
+        {/* "" */}
+      {/* )} */}
+      
     </div>
   );
 };

@@ -35,3 +35,7 @@ export const signUp = async (userInfo) => {
 export const paging = async (pageData) => {
   return await axios.post("/user/memberTotal", pageData);
 };
+
+export const TestMember = async (Data) => {
+  return await axios.post("/user/TestMemberList", Data);
+};

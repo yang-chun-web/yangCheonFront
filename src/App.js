@@ -8,9 +8,11 @@ import Home from "./Routes/Home";
 import Login from "./Routes/user/Login";
 import SignUp from "./Routes/admin/SignUp";
 import MemberList from "./Routes/admin/MemberList";
+
 import { useSetRecoilState } from "recoil";
 import { access } from "./atom";
 import { refreshToken } from "./api";
+import Paging from "./Routes/page/Page";
 
 function App() {
   const setActiveUser = useSetRecoilState(access);
@@ -32,7 +34,7 @@ function App() {
         <Route path="/boards/register" element={<Register />} />
         <Route path="/admin/signup" element={<SignUp />} />
         <Route path="/admin/memberList" element={<MemberList />} />
-        <Route path="/user/paging" element={<Paging />} />
+        <Route path="/user/paging" element={<Paging/>} />
         <Route path="/boards/:id" element={<Detail />} />
         <Route path="/boards/edit/:id" element={<Edit />} />
       </Routes>
