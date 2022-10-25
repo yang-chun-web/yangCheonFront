@@ -7,6 +7,7 @@ import { admin } from "../../atom";
 const SignUp = () => {
   const { register, handleSubmit } = useForm();
   const adminCheck = useRecoilValue(admin);
+  console.log(adminCheck);
   const onSubmit = (userInfo) => {
     console.log(userInfo);
     signUp(userInfo)

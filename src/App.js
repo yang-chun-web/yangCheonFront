@@ -9,20 +9,21 @@ import Login from "./Routes/user/Login";
 import SignUp from "./Routes/admin/SignUp";
 import MemberList from "./Routes/admin/MemberList";
 import { useSetRecoilState } from "recoil";
-import { access } from "./atom";
-import { refreshToken } from "./api";
+import { access, admin } from "./atom";
 
 function App() {
   const setActiveUser = useSetRecoilState(access);
+  const setAdmin = useSetRecoilState(admin);
   useEffect(() => {
     const refresh = async () => {
-      const result = await refreshToken().then((res) => res.status);
-      if (result === 201) {
+      const jsonResult = await fetch("/user/refresh").then((res) => res.json());
+      if (jsonResult) {
         setActiveUser(() => true);
+        setAdmin(() => jsonResult.admin);
       }
     };
     refresh();
-  }, [setActiveUser]);
+  }, [setActiveUser, setAdmin]);
   return (
     <Router>
       <Routes>

@@ -12,7 +12,7 @@ import {
   AuthTitle,
   AuthInput,
 } from "../../styles/user/auth";
-import { access } from "../../atom";
+import { access, admin } from "../../atom";
 
 const Block = styled.div`
   ${mediaStyle};
@@ -48,16 +48,35 @@ const LoginForm = styled.form`
 const Login = () => {
   const navigate = useNavigate();
   const userAccessed = useSetRecoilState(access);
+  const adminAccessed = useSetRecoilState(admin);
   const { register, handleSubmit } = useForm();
-  const onValid = (data) => {
-    console.log(data);
-    login(data)
-      .then(() => {
+  const onValid = async (data) => {
+    await fetch("/user/user-login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json;charset=utf-8",
+      },
+      body: JSON.stringify(data),
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        userAccessed(() => true);
+        navigate("/");
+        console.log(res.admin);
+        adminAccessed(() => res.admin);
+      })
+      .catch(() => alert("입력된 정보가 올바르지 않습니다"));
+    /* console.log(data);
+    const userInfos = await login(data)
+      .then((res) => {
+        res.json();
         userAccessed(() => true);
         navigate("/");
       })
       .catch(() => alert("입력된 정보가 올바르지 않습니다"));
+    console.log(userInfos); */
   };
+
   return (
     <Block>
       <AuthBlock>

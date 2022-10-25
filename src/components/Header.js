@@ -1,5 +1,5 @@
-import { useRecoilState } from "recoil";
-import { access } from "../atom";
+import { useRecoilState, useSetRecoilState } from "recoil";
+import { access, admin } from "../atom";
 import { AiOutlineEdit } from "react-icons/ai";
 import { logout } from "../api";
 
@@ -48,9 +48,11 @@ const Button = styled(Link)`
 function Header() {
   const navigate = useNavigate();
   const [activeUser, setActiveUser] = useRecoilState(access);
+  const setAdmin = useSetRecoilState(admin);
   const onLogoutClick = () => {
     logout().then(() => {
       setActiveUser(() => false);
+      setAdmin(() => false);
       navigate("/");
     });
   };
