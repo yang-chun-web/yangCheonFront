@@ -16,7 +16,9 @@ function App() {
   const setAdmin = useSetRecoilState(admin);
   useEffect(() => {
     const refresh = async () => {
-      const jsonResult = await fetch("/user/refresh").then((res) => res.json());
+      const jsonResult = await fetch("/user/refresh")
+        .then((res) => res.json())
+        .catch((error) => console.log(error));
       if (jsonResult) {
         setActiveUser(() => true);
         setAdmin(() => jsonResult.admin);
