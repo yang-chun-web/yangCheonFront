@@ -4,8 +4,8 @@ import styled from "styled-components";
 import { btnStyle, mediaStyle } from "../../styles/common";
 import Header from "../../components/Header";
 import { remove } from "../../api";
-import { useRecoilState } from "recoil";
-import { owner } from "../../atom";
+import { useRecoilState, useRecoilValue } from "recoil";
+import { admin, owner } from "../../atom";
 
 const Block = styled.div`
   ${mediaStyle}
@@ -73,6 +73,7 @@ const Detail = () => {
   const [detail, setDetail] = useState();
   const [files, setFiles] = useState();
   const [writer, setWriter] = useRecoilState(owner);
+  const adminChecker = useRecoilValue(admin);
 
   useEffect(() => {
     const { id } = param;
@@ -153,7 +154,7 @@ const Detail = () => {
             </FileBlock>
           </Wrapper>
 
-          {Object.values(writer)[0] ? (
+          {Object.values(writer)[0] || adminChecker ? (
             <ButtonBlock>
               <EditButton to={`/boards/edit/${detail._id}`}>
                 수정하기
