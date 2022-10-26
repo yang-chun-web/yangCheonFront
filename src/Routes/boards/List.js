@@ -46,7 +46,12 @@ const List = () => {
   const [list, setList] = useState([]);
   const [limit, setLimit] = useState(5);
   const [page, setPage] = useState(1);
+  const [value, setValue] = useState("");
+
   const offset = (page - 1) * limit;
+  const listView = list.filter((item) =>
+    item.title.replace(" ", "").toLowerCase().includes(value.toLowerCase())
+  );
 
   const fetchList = async () => {
     const response = await fetch("/board/board-search-list").then((res) =>
@@ -60,12 +65,18 @@ const List = () => {
     setLoading(false);
   }, []);
 
+  const onChange = (event) => {
+    const searchValue = event.target.value;
+    setValue(() => searchValue);
+  };
+
   return (
     <Block>
       <Wrapper>
+        <input type="text" onChange={onChange} />
         {loading
           ? ""
-          : list.slice(offset, offset + limit).map((item) => (
+          : listView.slice(offset, offset + limit).map((item) => (
               <TextCard to={`/boards/${item._id}`} key={item._id}>
                 <Title>{item.title}</Title>
                 <CreatedAt>
@@ -76,7 +87,7 @@ const List = () => {
       </Wrapper>
       <footer>
         <Pagination
-          total={list.length}
+          total={listView.length}
           limit={limit}
           page={page}
           setPage={setPage}
