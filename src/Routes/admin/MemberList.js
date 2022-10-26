@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import Header from "../../components/Header";
 import styled from "styled-components";
 import { mediaStyle } from "../../styles/common";
@@ -50,13 +50,14 @@ const MemberList = () => {
   const [total, setTotal] = useState(0); // 전체 페이지
   const [size, setSize] = useState(2); // 보여줄 항목 개수
   const [maxPage, setMaxPage] = useState(0); // 한 페이지에 보여줄 페이지 개수
-  //const [getData, setData] = useState(0);
+  const [findStr, setFindStr] = useState(0); // 한 페이지에 보여줄 페이지 개수
 
   const pageData = {
     page : page,
     total : total,
     size : size,
-    maxPage : maxPage
+    maxPage : maxPage,
+    findStr : findStr,
   }
 
   const fetchMemberList = async () => {
@@ -65,7 +66,15 @@ const MemberList = () => {
     setMemberList(body);
   };
   
-  const TestMemberList = async () => {
+  const onChangingPage = async (page) => {
+    setPage(page);
+    await TestMemberList(page);
+  }
+  
+
+  const TestMemberList = async (page) => {
+    if(page===undefined) page=1;
+    pageData.page = page;
     const reqData = await TestMember(pageData);
     console.log(reqData);
     const body = await reqData.data.listData;
@@ -79,10 +88,8 @@ const MemberList = () => {
 
   };
 
-  const getData = (getData) => {
-    setPage(getData);
-    console(getData);
-  }
+
+
 
 
   const onDeleteClick = (event) => {
@@ -104,6 +111,8 @@ const MemberList = () => {
       {/* {adminCheck ? ( */}
         <Block>
           <Wrapper>
+            <input></input>
+            <button>검색</button>
             {loading
               ? ""
               : memberList.map((item) => (
@@ -118,7 +127,7 @@ const MemberList = () => {
                 ))}
           </Wrapper>
         </Block>
-        <Paging pageData={pageData} getData={getData}  />
+        <Paging pageData={pageData} parentCallBack={async (page) => {await onChangingPage(page)} }  />
       {/* ) : ( */}
         {/* "" */}
       {/* )} */}
